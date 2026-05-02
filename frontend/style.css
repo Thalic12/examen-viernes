@@ -1,0 +1,205 @@
+/* =========================================
+   VARIABLES Y RESET
+   ========================================= */
+:root {
+    --primary: #4f46e5;          /* Azul índigo principal */
+    --primary-hover: #4338ca;
+    --bg-gradient: linear-gradient(135deg, #e0e7ff 0%, #f1f5f9 100%);
+    --card-bg: #ffffff;
+    --text-main: #1e293b;
+    --text-muted: #64748b;
+    --danger: #ef4444;
+    --success: #10b981;
+    --shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -6px rgba(0, 0, 0, 0.04);
+}
+
+body {
+    background: var(--bg-gradient);
+    background-attachment: fixed;
+    font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+    color: var(--text-main);
+    margin: 0;
+    min-height: 100vh;
+    line-height: 1.5;
+}
+
+/* =========================================
+   COMPONENTES DE NAVEGACIÓN
+   ========================================= */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 8%;
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.navbar h1 {
+    font-size: 1.25rem;
+    margin: 0;
+    color: var(--primary);
+    font-weight: 800;
+}
+
+/* =========================================
+   TARJETAS Y CONTENEDORES
+   ========================================= */
+.container {
+    max-width: 1000px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+.card {
+    background: var(--card-bg);
+    border-radius: 24px; /* Bordes extra redondeados estilo imagen */
+    padding: 40px;
+    box-shadow: var(--shadow);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    margin-bottom: 30px;
+    animation: slideUp 0.5s ease-out;
+}
+
+@keyframes slideUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* =========================================
+   FORMULARIOS
+   ========================================= */
+.form-group {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+input {
+    width: 100%;
+    padding: 14px 18px;
+    border: 1.5px solid #e2e8f0;
+    border-radius: 14px;
+    font-size: 1rem;
+    background-color: #f8fafc;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+}
+
+input:focus {
+    outline: none;
+    border-color: var(--primary);
+    background-color: #ffffff;
+    box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.1);
+}
+
+/* =========================================
+   BOTONES Y ENLACES (ESTILO BOTÓN)
+   ========================================= */
+
+/* Estilo base para todos los enlaces que deben ser botones */
+a, button {
+    display: inline-block;
+    text-decoration: none;
+    text-align: center;
+    border-radius: 14px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    padding: 14px 24px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+    border: none;
+    box-sizing: border-box;
+    font-family: inherit;
+}
+
+/* Botón Principal (Entrar, Registrarme, Guardar) */
+.btn-main, button[type="submit"] {
+    background: linear-gradient(135deg, var(--primary) 0%, #6366f1 100%);
+    color: #ffffff !important;
+    width: 100%;
+    box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3);
+}
+
+.btn-main:hover, button[type="submit"]:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(79, 70, 229, 0.4);
+    filter: brightness(1.1);
+}
+
+/* Enlaces Secundarios (Crear cuenta, Volver) */
+.btn-secondary-link {
+    background: #f1f5f9;
+    color: var(--primary) !important;
+    border: 1.5px solid #e2e8f0;
+    margin-top: 15px;
+    width: 100%;
+}
+
+.btn-secondary-link:hover {
+    background: #e2e8f0;
+    transform: scale(1.02);
+}
+
+/* Botón Salir (Navbar) */
+.btn-logout {
+    background: rgba(239, 68, 68, 0.1);
+    color: var(--danger) !important;
+    padding: 8px 20px;
+    border-radius: 50px;
+    font-size: 0.85rem;
+    border: 1px solid rgba(239, 68, 68, 0.2);
+}
+
+.btn-logout:hover {
+    background: var(--danger);
+    color: #ffffff !important;
+}
+
+/* =========================================
+   TABLAS MODERNAS
+   ========================================= */
+table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 10px;
+}
+
+th {
+    color: var(--text-muted);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    text-align: left;
+    padding: 10px 20px;
+}
+
+tbody tr {
+    background: #ffffff;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+}
+
+tbody td {
+    padding: 20px;
+    border-top: 1px solid #f1f5f9;
+    border-bottom: 1px solid #f1f5f9;
+}
+
+tbody td:first-child { border-left: 1px solid #f1f5f9; border-radius: 16px 0 0 16px; }
+tbody td:last-child { border-right: 1px solid #f1f5f9; border-radius: 0 16px 16px 0; }
+
+tbody tr:hover {
+    transform: scale(1.01);
+    box-shadow: 0 10px 15px -5px rgba(0,0,0,0.05);
+}

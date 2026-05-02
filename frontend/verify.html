@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TecWeb • Verificar Código</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="page auth-page">
+        <div class="brand">
+            <h1>TecWeb • OTP</h1>
+        </div>
+        <section>
+            <div class="card">
+                <h2>Verifica tu cuenta</h2>
+                <div class="hint">Ingresa el código de 6 dígitos enviado a tu correo.</div>
+                
+                <form id="verify-form" onsubmit="event.preventDefault(); verificarOTP();">
+                    <div class="row">
+                        <label for="codigo">Código de Seguridad</label>
+                        <input type="text" id="codigo" placeholder="000000" maxlength="6" required 
+                               style="text-align: center; font-size: 1.5rem; letter-spacing: 5px;">
+                    </div>
+
+                    <div class="timer-container" style="text-align: center; margin: 15px 0;">
+                        <span id="timer" style="font-weight: bold; color: #e74c3c;">05:00</span>
+                    </div>
+
+                    <div class="actions">
+                        <button class="btn-primary" type="submit">Verificar y Entrar</button>
+                        <button class="btn-link" type="button" onclick="reenviarOTP()">Reenviar código</button>
+                    </div>
+
+                    <p id="mensaje" class="error" style="display: none; margin-top: 15px;"></p>
+                </form>
+            </div>
+        </section>
+    </div>
+    <script src="verify.js"></script>
+</body>
+</html>
