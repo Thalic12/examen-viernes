@@ -95,9 +95,12 @@ def verify_user_otp(data, db: Session):
 
     # Activar al usuario
     user = db.query(User).filter(User.email == data.email).first()
-    if user:
-        user.is_active = True
-    
+    if not user:
+        db.delete(otp_record)
+        db.commit()
+        raise HTTPException(status_code=400, detail="Usuario no encontrado")
+    user.is_active = True
+
     # Limpiar OTP usado
     db.delete(otp_record)
     db.commit()
@@ -119,13 +122,19 @@ def login_user(data, db: Session):
     if not user:
         raise HTTPException(status_code=400, detail="Credenciales incorrectas")
 
-    # 2. Verificar que la cuenta esté activa
-    if not user.is_active:
-        raise HTTPException(status_code=400, detail="La cuenta no ha sido verificada por correo")
-
-    # 3. Validar la contraseña
+    # 2. Validar la contraseña
     if not verify_password(data.password, user.password):
         raise HTTPException(status_code=400, detail="Credenciales incorrectas")
+
+    # 3. Si la cuenta no está activa, reenviamos OTP para completar verificación
+    if not user.is_active:
+        code = create_otp_record(user.email, db)
+        send_email(user.email, code)
+        db.commit()
+        return {
+            "requires_verification": True,
+            "msg": "Cuenta sin verificar. Te enviamos un nuevo código al correo."
+        }
 
     # 4. Generar el token de acceso (3 días)
     token = create_access_token(data={"sub": user.email})
@@ -135,3 +144,14 @@ def login_user(data, db: Session):
         "token_type": "bearer",
         "msg": "Sesión iniciada correctamente"
     }
+
+
+def resend_otp(data, db: Session):
+    user = db.query(User).filter(User.email == data.email).first()
+    if not user:
+        raise HTTPException(status_code=400, detail="Usuario no encontrado")
+
+    code = create_otp_record(user.email, db)
+    send_email(user.email, code)
+    db.commit()
+    return {"msg": "Nuevo código enviado al correo"}

@@ -1,32 +1,35 @@
-const loginForm = document.getElementById('loginForm'); // Asegúrate que tu <form> tenga este ID
+const API = 'http://127.0.0.1:8000';
+
+const loginForm = document.getElementById('login-form');
 
 loginForm.addEventListener('submit', async (e) => {
     e.preventDefault();
 
-    const email = document.getElementById('email').value;
-    const password = document.getElementById('password').value;
+    const email = document.getElementById('login-email').value;
+    const password = document.getElementById('login-password').value;
 
     try {
-        // IMPORTANTE: Usamos '/auth/login' sin el localhost
-        const response = await fetch('/auth/login', {
+        const response = await fetch(`${API}/auth/login`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                username: email, // O 'email' según pida tu modelo
-                password: password
+                email,
+                password
             })
         });
 
         const data = await response.json();
 
-        if (response.ok) {
-            // Guardamos el token para otras peticiones
-            localStorage.setItem('token', data.access_token);
+        if (response.ok && data.requires_verification) {
+            localStorage.setItem('pending_email', email);
+            alert(data.msg || 'Debes verificar tu cuenta primero.');
+            window.location.href = 'verify.html';
+        } else if (response.ok) {
+            localStorage.setItem('access_token', data.access_token);
             alert('¡Bienvenido!');
-            // Redirigimos a la ruta que definimos en el main.py
-            window.location.href = '/index';
+            window.location.href = 'index.html';
         } else {
             alert('Error: ' + (data.detail || 'Credenciales inválidas'));
         }

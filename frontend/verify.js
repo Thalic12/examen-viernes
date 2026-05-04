@@ -41,11 +41,10 @@ async function reenviarOTP() {
     const email = localStorage.getItem("pending_email") || localStorage.getItem("email");
 
     try {
-        // Usamos el flujo de login para reenviar el código
-        const res = await fetch(`${API}/auth/login`, {
+         const res = await fetch(`${API}/auth/resend-otp`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ email, password: "" }) 
+            body: JSON.stringify({ email })
         });
 
         if (res.ok) {

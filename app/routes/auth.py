@@ -4,7 +4,7 @@ from ..database import get_db
 from pydantic import BaseModel, EmailStr
 
 # Importamos la lógica corregida de los servicios
-from ..services.auth_service import register_user, verify_user_otp, login_user
+from ..services.auth_service import register_user, verify_user_otp, login_user, resend_otp
 
 router = APIRouter(prefix="/auth", tags=["Auth"])
 
@@ -22,6 +22,10 @@ class Login(BaseModel):
 class Verify(BaseModel):
     email: EmailStr
     code: str # El código de 6 dígitos
+
+
+class ResendOtp(BaseModel):
+    email: EmailStr
 
 # --- ENDPOINTS ---
 
@@ -49,3 +53,8 @@ def login(data: Login, db: Session = Depends(get_db)):
     Les envía un nuevo código OTP al correo.
     """
     return login_user(data, db)
+
+
+@router.post("/resend-otp")
+def resend_code(data: ResendOtp, db: Session = Depends(get_db)):
+    return resend_otp(data, db)

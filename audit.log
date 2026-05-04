@@ -1,0 +1,20 @@
+2026-04-29 22:58:38,104 - INFO - Operation: CREAR_ESTUDIANTE | Path: /students/ | IP: 127.0.0.1 | Status: 200 | Datos: {  "name": "thalia",  "age": 10,  "grade": 5}
+2026-04-30 00:22:10,199 - INFO - Operation: CREAR_ESTUDIANTE | Path: /students | IP: 127.0.0.1 | Status: 307 | Datos: {"name":"THALIA","age":20,"grade":4.5}
+2026-04-30 00:22:10,230 - INFO - Operation: CREAR_ESTUDIANTE | Path: /students/ | IP: 127.0.0.1 | Status: 200 | Datos: {"name":"THALIA","age":20,"grade":4.5}
+2026-04-30 00:25:49,508 - INFO - Operation: ACTUALIZAR_ESTUDIANTE | Path: /students/1 | IP: 127.0.0.1 | Status: 200 | Datos: {"name":"thalia","age":10,"grade":5}
+2026-04-30 00:25:57,433 - INFO - Operation: ACTUALIZAR_ESTUDIANTE | Path: /students/1 | IP: 127.0.0.1 | Status: 200 | Datos: {"name":"thalia","age":10,"grade":3}
+2026-04-30 00:38:13,234 - INFO - Operation: ELIMINAR_ESTUDIANTE | Path: /students/2 | IP: 127.0.0.1 | Status: 200 | Datos: N/A
+2026-04-30 23:05:18,856 - INFO - Operation: CREAR_ESTUDIANTE | Path: /students | IP: 127.0.0.1 | Status: 307 | Datos: {"name":"jonathan","age":19,"grade":4}
+2026-04-30 23:05:18,877 - INFO - Operation: CREAR_ESTUDIANTE | Path: /students/ | IP: 127.0.0.1 | Status: 200 | Datos: {"name":"jonathan","age":19,"grade":4}
+2026-04-30 23:07:28,001 - INFO - Operation: CREAR_ESTUDIANTE | Path: /students | IP: 127.0.0.1 | Status: 307 | Datos: {"name":"tiffany","age":20,"grade":2}
+2026-04-30 23:07:28,029 - INFO - Operation: CREAR_ESTUDIANTE | Path: /students/ | IP: 127.0.0.1 | Status: 200 | Datos: {"name":"tiffany","age":20,"grade":2}
+2026-05-01 13:36:34,878 - INFO - Operation: CREAR_ESTUDIANTE | Path: /students | IP: 127.0.0.1 | Status: 307 | Datos: {"name":"THALIA","age":20,"grade":2}
+2026-05-01 13:36:34,941 - INFO - Operation: CREAR_ESTUDIANTE | Path: /students/ | IP: 127.0.0.1 | Status: 200 | Datos: {"name":"THALIA","age":20,"grade":2}
+2026-05-01 13:47:36,988 - INFO - Operation: CREAR_ESTUDIANTE | Path: /students | IP: 127.0.0.1 | Status: 307 | Datos: {"name":"tiffany","age":15,"grade":3}
+2026-05-01 13:47:37,345 - INFO - Operation: CREAR_ESTUDIANTE | Path: /students/ | IP: 127.0.0.1 | Status: 200 | Datos: {"name":"tiffany","age":15,"grade":3}
+2026-05-01 14:20:47,881 - INFO - Operation: CREAR_ESTUDIANTE | Path: /students | IP: 127.0.0.1 | Status: 307 | Datos: {"name":"andres","age":19,"grade":1}
+2026-05-01 14:20:47,951 - INFO - Operation: CREAR_ESTUDIANTE | Path: /students/ | IP: 127.0.0.1 | Status: 200 | Datos: {"name":"andres","age":19,"grade":1}
+2026-05-01 14:20:51,633 - INFO - Operation: ACTUALIZAR_ESTUDIANTE | Path: /students/1 | IP: 127.0.0.1 | Status: 200 | Datos: {"name":"THALIA","age":20,"grade":2}
+2026-05-01 14:20:56,217 - INFO - Operation: ACTUALIZAR_ESTUDIANTE | Path: /students/1 | IP: 127.0.0.1 | Status: 200 | Datos: {"name":"THALIA","age":20,"grade":3}
+2026-05-01 18:55:16,996 - INFO - Operation: CREAR_ESTUDIANTE | Path: /students | IP: 127.0.0.1 | Status: 307 | Datos: {"name":"THALIA","age":20,"grade":4}
+2026-05-01 18:55:17,019 - INFO - Operation: CREAR_ESTUDIANTE | Path: /students/ | IP: 127.0.0.1 | Status: 200 | Datos: {"name":"THALIA","age":20,"grade":4}
