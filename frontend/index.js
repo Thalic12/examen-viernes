@@ -1,4 +1,4 @@
-const API_URL = 'http://localhost:8000/students';
+const API_URL = `${window.location.origin}/students`;
 
 document.addEventListener('DOMContentLoaded', () => {
     loadStudents();

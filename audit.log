@@ -18,3 +18,5 @@
 2026-05-01 14:20:56,217 - INFO - Operation: ACTUALIZAR_ESTUDIANTE | Path: /students/1 | IP: 127.0.0.1 | Status: 200 | Datos: {"name":"THALIA","age":20,"grade":3}
 2026-05-01 18:55:16,996 - INFO - Operation: CREAR_ESTUDIANTE | Path: /students | IP: 127.0.0.1 | Status: 307 | Datos: {"name":"THALIA","age":20,"grade":4}
 2026-05-01 18:55:17,019 - INFO - Operation: CREAR_ESTUDIANTE | Path: /students/ | IP: 127.0.0.1 | Status: 200 | Datos: {"name":"THALIA","age":20,"grade":4}
+2026-05-04 15:30:13,098 - INFO - Operation: CREAR_ESTUDIANTE | Path: /students | IP: 127.0.0.1 | Status: 307 | Datos: {"name":"tiffany","age":30,"grade":1}
+2026-05-04 15:30:13,171 - INFO - Operation: CREAR_ESTUDIANTE | Path: /students/ | IP: 127.0.0.1 | Status: 200 | Datos: {"name":"tiffany","age":30,"grade":1}

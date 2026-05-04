@@ -66,7 +66,7 @@ def index():
 
 @app.get("/verify", include_in_schema=False)
 def verify():
-    return RedirectResponse(url="/frontend/auth.html")
+    return RedirectResponse(url="/frontend/verify.html")
 
 @app.get("/registro", include_in_schema=False)
 def registro():
