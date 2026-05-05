@@ -1,44 +1,46 @@
 import os
-import smtplib
-from email.mime.text import MIMEText
-
 from dotenv import load_dotenv
+from sendgrid import SendGridAPIClient
+from sendgrid.helpers.mail import Mail
 
-load_dotenv()  # Esta línea busca el archivo .env y carga los datos
+# Cargar variables del .env
+load_dotenv()
 
-# Ahora ya puedes usarlas:
-email_user = os.getenv("EMAIL_USER")
-email_pass = os.getenv("EMAIL_PASS")
+# Variables de entorno
+API_KEY = os.getenv("SENDGRID_API_KEY")
+FROM_EMAIL = os.getenv("FROM_EMAIL")
+
 def send_email(to_email: str, code: str):
-    try:
-        # Credenciales (Asegúrate de usar 'Contraseña de Aplicación' de Google)
-        sender = os.getenv("EMAIL_USER")
-        password = os.getenv("EMAIL_PASS")
+    """
+    Envía un correo con código OTP usando SendGrid
+    """
 
-        if not sender or not password:
-            print("Error: No se encontraron las variables de entorno de email.")
-            return
+    if not API_KEY or not FROM_EMAIL:
+        print("Error: Faltan variables de entorno (SENDGRID_API_KEY o FROM_EMAIL)")
+        return
 
-        # Diseño del correo
-        cuerpo = f"""
-        <h2>Verificación de Cuenta</h2>
-        <p>Tu código de seguridad es: <b>{code}</b></p>
-        <p>Este código expirará en 5 minutos.</p>
+    message = Mail(
+        from_email=FROM_EMAIL,
+        to_emails=to_email,
+        subject="Código de Verificación",
+        html_content=f"""
+        <div style="font-family: Arial, sans-serif; padding: 20px;">
+            <h2 style="color: #333;">Verificación de Cuenta</h2>
+            <p>Tu código de seguridad es:</p>
+            <h1 style="color: #007BFF;">{code}</h1>
+            <p>Este código expirará en 5 minutos.</p>
+            <hr>
+            <small>Si no solicitaste este código, ignora este mensaje.</small>
+        </div>
         """
-        
-        msg = MIMEText(cuerpo, "html")
-        msg["Subject"] = "Código de Verificación - Registro Estudiantes"
-        msg["From"] = sender
-        msg["To"] = to_email
+    )
 
-        # Configuración SMTP
-        server = smtplib.SMTP("smtp.gmail.com", 587)
-        server.starttls()
-        server.login(sender, password)
-        server.send_message(msg)
-        server.quit()
+    try:
+        sg = SendGridAPIClient(API_KEY)
+        response = sg.send(message)
 
-        print(f"Correo enviado exitosamente a {to_email}")
+        print("Correo enviado correctamente")
+        print("Status Code:", response.status_code)
 
     except Exception as e:
-        print(f"Error crítico enviando correo: {str(e)}")
+        print("Error enviando correo:", str(e))
