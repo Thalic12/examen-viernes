@@ -12,7 +12,8 @@ SQLALCHEMY_DATABASE_URL = "sqlite:///./students.db"
 # engine: objeto que gestiona la conexión a la base de datos
 # connect_args={"check_same_thread": False} permite acceso desde múltiples hilos
 engine = create_engine(
-    SQLALCHEMY_DATABASE_URL, connect_args={"check_same_thread": False}
+    SQLALCHEMY_DATABASE_URL, connect_args={"check_same_thread": False, "timeout": 30
+    }
 )
 
 # SessionLocal: fábrica de sesiones de base de datos

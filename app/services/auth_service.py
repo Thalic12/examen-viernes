@@ -5,7 +5,7 @@ from sqlalchemy.orm import Session
 from datetime import datetime, timedelta
 from jose import jwt
 from dotenv import load_dotenv
-
+from fastapi import BackgroundTasks
 # Carga de variables de entorno
 load_dotenv()
 
@@ -57,7 +57,7 @@ def create_access_token(data: dict):
 
 # --- FLUJO DE REGISTRO ---
 
-def register_user(data, db: Session):
+def register_user(data, db: Session, background_tasks: BackgroundTasks):
     user_exists = db.query(User).filter(User.email == data.email).first()
     if user_exists:
         raise HTTPException(status_code=400, detail="El correo ya está registrado")
@@ -71,11 +71,16 @@ def register_user(data, db: Session):
     )
     db.add(new_user)
     
-    # Generar OTP y enviarlo inmediatamente
+    # Generar OTP
     code = create_otp_record(data.email, db)
-    send_email(data.email, code)
     
+    # --- CAMBIO AQUÍ: Primero guardamos en la DB para liberar el archivo ---
     db.commit()
+    
+    # --- CAMBIO AQUÍ: Enviamos el correo al "fondo" (Background) ---
+    # Esto evita que el error "Network is unreachable" bloquee la ejecución
+    background_tasks.add_task(send_email, data.email, code)
+    
     return {"msg": "Usuario registrado. Por favor verifica tu correo."}
 
 # --- FLUJO DE VERIFICACIÓN ---

@@ -2,7 +2,7 @@ from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 from ..database import get_db
 from pydantic import BaseModel, EmailStr
-
+from fastapi import BackgroundTasks
 # Importamos la lógica corregida de los servicios
 from ..services.auth_service import register_user, verify_user_otp, login_user, resend_otp
 
@@ -29,14 +29,15 @@ class ResendOtp(BaseModel):
 
 # --- ENDPOINTS ---
 
-@router.post("/register")
-def register(data: Register, db: Session = Depends(get_db)):
-    """
-    Crea el usuario y envía el OTP inmediatamente.
-    Expira en 5 minutos.
-    """
-    return register_user(data, db)
+from fastapi import BackgroundTasks # Importa esto
 
+@router.post("/register")
+def register(data: Register, background_tasks: BackgroundTasks, db: Session = Depends(get_db)):
+    """
+    Crea el usuario y delega el envío del OTP a una tarea en segundo plano.
+    """
+    # Pasamos background_tasks a la función lógica
+    return register_user(data, db, background_tasks)
 @router.post("/verify")
 def verify(data: Verify, db: Session = Depends(get_db)):
     """
